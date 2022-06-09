@@ -1,8 +1,5 @@
 <template>
-    <div>
-        WORK IN PROGRESS
-        <router-view></router-view>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>
