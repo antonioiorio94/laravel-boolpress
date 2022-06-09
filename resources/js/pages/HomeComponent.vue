@@ -7,8 +7,11 @@
 </template>
 
 <script>
+import HeaderComponent from "../components/HeaderComponent.vue";
+
 export default {
     name: "HomeComponent",
+    components: { HeaderComponent },
 };
 </script>
 
