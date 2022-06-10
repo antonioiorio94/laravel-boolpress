@@ -5,13 +5,16 @@
             <h3>{{ title }}</h3>
             <p>{{ trimmedContent }}</p>
         </div>
+        <router-link :to="{ name: 'single-blog', params: { id } }"
+            >Visualizza post</router-link
+        >
     </div>
 </template>
 
 <script>
 export default {
     name: "PostCardComponent",
-    props: ["title", "cover", "content"],
+    props: ["title", "cover", "content", "id"],
     computed: {
         trimmedContent() {
             const shortContent =

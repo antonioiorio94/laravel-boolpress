@@ -1,10 +1,11 @@
 <template>
     <div class="d-flex justify-content-center mt-5">
-        <div v-for="(post, index) in posts" :key="index">
+        <div v-for="post in posts" :key="post.index">
             <PostCardComponent
                 :title="post.title"
                 :cover="post.cover"
                 :content="post.content"
+                :id="post.id"
             />
         </div>
     </div>
