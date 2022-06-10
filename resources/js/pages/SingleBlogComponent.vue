@@ -1,10 +1,18 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center">Blog</div>
+            <div class="col-12 text-center">My post</div>
         </div>
         <div v-if="post">
-            {{ post.title }}
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <div>
+                <ul>
+                    <li v-for="tag in post.tags" :key="tag.id">
+                        {{ tag.name }}
+                    </li>
+                </ul>
+            </div>
         </div>
         <div v-else>Caricamento in corso</div>
     </div>

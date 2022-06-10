@@ -54,7 +54,7 @@ class PostController extends Controller
     {
         //
 
-        $post= Post::where('id', $id)->with(['category', 'tag'])->first();
+        $post= Post::where('id', $id)->with(['category', 'tags'])->first();
 
         $result = ['results'=>$post, 'success'=>true];
 

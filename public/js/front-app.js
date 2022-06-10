@@ -2199,6 +2199,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SingleBlogComponent",
   data: function data() {
@@ -38807,7 +38815,27 @@ var render = function () {
     _vm._m(0),
     _vm._v(" "),
     _vm.post
-      ? _c("div", [_vm._v("\n        " + _vm._s(_vm.post.title) + "\n    ")])
+      ? _c("div", [
+          _c("h2", [_vm._v(_vm._s(_vm.post.title))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.post.content))]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "ul",
+              _vm._l(_vm.post.tags, function (tag) {
+                return _c("li", { key: tag.id }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(tag.name) +
+                      "\n                "
+                  ),
+                ])
+              }),
+              0
+            ),
+          ]),
+        ])
       : _c("div", [_vm._v("Caricamento in corso")]),
   ])
 }
@@ -38817,7 +38845,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 text-center" }, [_vm._v("Blog")]),
+      _c("div", { staticClass: "col-12 text-center" }, [_vm._v("My post")]),
     ])
   },
 ]
