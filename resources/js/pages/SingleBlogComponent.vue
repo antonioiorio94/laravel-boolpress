@@ -7,6 +7,11 @@
             <h2>{{ post.title }}</h2>
             <p>{{ post.content }}</p>
             <div>
+                <h3>Categoria:</h3>
+                {{ post.category.name }}
+            </div>
+            <div>
+                <h3>Tags:</h3>
                 <ul>
                     <li v-for="tag in post.tags" :key="tag.id">
                         {{ tag.name }}

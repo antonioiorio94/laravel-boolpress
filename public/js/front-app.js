@@ -2071,6 +2071,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "BlogComponent",
@@ -2079,23 +2096,40 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      currentPage: 1,
+      previousPageLink: "",
+      nextPageLink: ""
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.loadPage("http://127.0.0.1:8000/api/posts");
+  },
+  methods: {
+    loadPage: function loadPage(url) {
+      var _this = this;
 
-    window.axios.get("http://127.0.0.1:8000/api/posts").then(function (_ref) {
-      var status = _ref.status,
-          data = _ref.data;
-      console.log(data);
+      window.axios.get(url).then(function (_ref) {
+        var status = _ref.status,
+            data = _ref.data;
+        console.log(data);
 
-      if (status === 200 && data.success) {
-        _this.posts = data.results;
-      }
-    })["catch"](function (e) {
-      console.log(e);
-    });
+        if (status === 200 && data.success) {
+          _this.posts = data.results.data;
+          _this.currentPage = data.results.current_page;
+          _this.previousPageLink = data.results.prev_page_url;
+          _this.nextPageLink = data.results.next_page_url;
+        }
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    goPreviousPage: function goPreviousPage() {
+      this.loadPage(this.previousPageLink);
+    },
+    goNextPage: function goNextPage() {
+      this.loadPage(this.nextPageLink);
+    }
   }
 });
 
@@ -2187,6 +2221,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38656,7 +38695,42 @@ var render = function () {
     _vm.posts.length > 0
       ? _c(
           "div",
-          [_c("PostCardListComponent", { attrs: { posts: _vm.posts } })],
+          [
+            _c("PostCardListComponent", { attrs: { posts: _vm.posts } }),
+            _vm._v(" "),
+            _c("div", { staticClass: "d-flex justify-content-center mt-5" }, [
+              _vm.previousPageLink
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary mr-5",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.goPreviousPage()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                Indietro\n            ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.nextPageLink
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function ($event) {
+                          return _vm.goNextPage()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                Avanti\n            ")]
+                  )
+                : _vm._e(),
+            ]),
+          ],
           1
         )
       : _c("div", [_vm._v("Caricamento in corso")]),
@@ -38821,6 +38895,15 @@ var render = function () {
           _c("p", [_vm._v(_vm._s(_vm.post.content))]),
           _vm._v(" "),
           _c("div", [
+            _c("h3", [_vm._v("Categoria:")]),
+            _vm._v(
+              "\n            " + _vm._s(_vm.post.category.name) + "\n        "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("h3", [_vm._v("Tags:")]),
+            _vm._v(" "),
             _c(
               "ul",
               _vm._l(_vm.post.tags, function (tag) {
